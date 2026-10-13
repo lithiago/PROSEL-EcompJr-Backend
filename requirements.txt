@@ -2,3 +2,7 @@ fastapi
 uvicorn
 sqlalchemy
 pyjwt
+python-dotenv
+pydantic
+psycopg
+pwdlib[argon2]
