@@ -1,4 +1,10 @@
+from datetime import datetime, timedelta
+from typing import Any
+
+import jwt
+
 from src.errors.errors import RegisterError
+from src.core.config import JWT_SECRET, JWT_TEMPO_DE_EXPIRACAO, JWT_ALGORITMO
 from pwdlib import PasswordHash
 
 
@@ -26,3 +32,12 @@ def validar_senha(password: str) -> None:
 
 def get_senha_hash(senha: str):
     return senha_hash.hash(senha)
+
+def comparar_senhas(password: str, password_hash: str):
+    return senha_hash.verify(password, password_hash)
+
+def create_access_token(subject: str | Any, role: str | Any) -> str:
+    expire = datetime.utcnow() + timedelta(hours=JWT_TEMPO_DE_EXPIRACAO)
+    to_encode = {"exp": expire, "sub": str(subject), "role": str(role)}
+    encoded_jwt = jwt.encode(to_encode, JWT_SECRET, algorithm=JWT_ALGORITMO)
+    return encoded_jwt

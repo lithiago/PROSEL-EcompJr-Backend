@@ -12,3 +12,13 @@ class UserRegisterRequest(BaseModel):
 
 class UserRegisterSucess(BaseModel):
     message: str
+
+class UserAuthRequest(BaseModel):
+    email: str = Field(...)
+    senha: str = Field(...)
+
+class UserAuthSucess(BaseModel):
+    message: str
+    id: int
+    token: str
+    role: str
