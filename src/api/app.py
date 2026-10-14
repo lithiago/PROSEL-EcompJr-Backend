@@ -8,6 +8,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy import inspect, text
 
 # from src.api.errors import ApiError
+from src.api.produtos_router import produtos_router
 from src.api.auth_router import auth_router
 
 app = FastAPI(title="prosel-API", version="1.0.0")
@@ -18,3 +19,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(auth_router)
+app.include_router(produtos_router)
+
