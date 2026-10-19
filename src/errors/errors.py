@@ -22,5 +22,16 @@ class LoginError(ApiError):
 class ProdutoError(ApiError):
     def __init__(self, code: str, message: str, details: dict[str, Any] | None = None) -> None:
         super().__init__(code=code, message=message, status_code=422, details=details or {})
+
+
+class CategoriaError(ApiError):
+    def __init__(self, code: str, message: str, details: dict[str, Any] | None = None) -> None:
+        status_code = 404 if code == "CATEGORY_NOT_FOUND" else 422
+        super().__init__(
+            code=code,
+            message=message,
+            status_code=status_code,
+            details=details or {},
+        )
         
         
