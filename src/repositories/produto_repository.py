@@ -57,3 +57,7 @@ def buscar_produtos_por_fornecedores(db: Session, ids_fornecedores: list[int]):
         return []
 
     return db.query(Produto).filter(Produto.idFornecedor.in_(ids_fornecedores)).all()
+
+
+def listar_produtos_com_estoque_baixo(db: Session) -> list[Produto]:
+    return db.query(Produto).filter(Produto.qtdEmEstoque <= 10).all()

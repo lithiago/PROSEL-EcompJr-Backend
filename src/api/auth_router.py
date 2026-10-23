@@ -26,21 +26,6 @@ def get_db():
         db.close()
 
 
-@auth_router.post("/register", response_model=UserRegisterSucess, status_code=200)
-def criar_usuario(
-    payload: UserRegisterRequest, request: Request, db: Session = Depends(get_db)
-):
-    try:
-        return criar_usuario_service(db, payload)
-    except RegisterError as exc:
-        raise HTTPException(
-            status_code=exc.status_code,
-            detail={
-                "code": exc.code,
-                "message": exc.message,
-                "details": exc.details,
-            },
-        )
 
 
 @auth_router.post("/login", response_model=UserAuthSucess, status_code=200)

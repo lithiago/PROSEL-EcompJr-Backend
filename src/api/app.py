@@ -12,6 +12,7 @@ from src.api.categoria_router import categorias_router
 from src.api.fornecedor_router import fornecedor_router
 from src.api.produtos_router import produtos_router
 from src.api.auth_router import auth_router
+from src.api.usuario_router import usuario_router
 
 app = FastAPI(title="prosel-API", version="1.0.0")
 app.add_middleware(
@@ -21,6 +22,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(auth_router)
+app.include_router(usuario_router)
 app.include_router(produtos_router)
 app.include_router(categorias_router)
 app.include_router(fornecedor_router)
