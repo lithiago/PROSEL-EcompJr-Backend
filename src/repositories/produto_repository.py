@@ -1,4 +1,3 @@
-
 from datetime import datetime
 
 from sqlalchemy.orm import Session
@@ -41,3 +40,20 @@ def criar_produto(
     db.refresh(produto)
 
     return produto
+
+
+def buscar_produtos_por_categorias(
+    db: Session,
+    ids_categoria: list[int],
+):
+    if not ids_categoria:
+        return []
+
+    return db.query(Produto).filter(Produto.idCategoria.in_(ids_categoria)).all()
+
+
+def buscar_produtos_por_fornecedores(db: Session, ids_fornecedores: list[int]):
+    if not ids_fornecedores:
+        return []
+
+    return db.query(Produto).filter(Produto.idFornecedor.in_(ids_fornecedores)).all()

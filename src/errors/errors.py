@@ -33,5 +33,20 @@ class CategoriaError(ApiError):
             status_code=status_code,
             details=details or {},
         )
-        
-        
+
+
+class FornecedorError(ApiError):
+    def __init__(self, code: str, message: str, details: dict[str, Any] | None = None) -> None:
+        if code == "SUPPLIER_NOT_FOUND":
+            status_code = 404
+        elif code == "SUPPLIER_HAS_PRODUCTS":
+            status_code = 409
+        else:
+            status_code = 422
+
+        super().__init__(
+            code=code,
+            message=message,
+            status_code=status_code,
+            details=details or {},
+        )

@@ -9,6 +9,7 @@ from sqlalchemy import inspect, text
 
 # from src.api.errors import ApiError
 from src.api.categoria_router import categorias_router
+from src.api.fornecedor_router import fornecedor_router
 from src.api.produtos_router import produtos_router
 from src.api.auth_router import auth_router
 
@@ -22,3 +23,4 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(produtos_router)
 app.include_router(categorias_router)
+app.include_router(fornecedor_router)
